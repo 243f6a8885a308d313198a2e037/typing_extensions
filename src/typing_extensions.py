@@ -257,10 +257,11 @@ def IntVar(name):
     return typing.TypeVar(name)
 
 
-# 3.8+:
-if hasattr(typing, 'Literal'):
+# Literal on Python 3.8 does not confirm PEP 586.
+# 3.9+:
+if hasattr(typing, 'Literal') and sys.version_info[:2] >= (3, 9):
     Literal = typing.Literal
-# 3.7:
+# 3.7/3.8:
 else:
     class _LiteralForm(typing._SpecialForm, _root=True):
 
